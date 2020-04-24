@@ -27,8 +27,8 @@ ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
 ENV APACHE_SERVER_NAME localhost
 ENV APACHE_SERVER_ADMIN yj4@rice.edu
-ENV APACHE_SSL_CERTS localhost.crt
-ENV APACHE_SSL_PRIVATE localhost.key
+#ENV APACHE_SSL_CERTS localhost.crt
+#ENV APACHE_SSL_PRIVATE localhost.key
 ENV APACHE_SSL_PORT 10443
 ENV APACHE_LOG_LEVEL info
 ENV APACHE_SSL_LOG_LEVEL info
@@ -37,6 +37,8 @@ ENV APACHE_SSL_SSL_PROXY_ENGINE Off
 ENV APACHE_SSL_PROXY_CHECK_PEER_NAME On
 ENV APACHE_SERVER_SIGNATURE Off
 ENV APACHE_SERVER_TOKENS Prod
+
+ENV APP_BASE_PATH /dspace
 
 # For more info See https://httpd.apache.org/docs/2.4/mod/mod_http2.html
 ENV APACHE_HTTP_PROTOCOLS http/1.1
@@ -66,9 +68,8 @@ COPY configs/httpd/dir.conf /etc/apache2/mods-enabled/
 COPY configs/httpd/ports.conf /etc/apache2/
 
 # Copy Server (pub and key)
-COPY configs/certs/localhost.crt /etc/ssl/certs/
-COPY configs/certs/localhost.crt /etc/ssl/certs/
-COPY configs/certs/localhost.key /etc/ssl/private/
+COPY configs/certs/${APACHE_SERVER_NAME}.crt /etc/ssl/certs/
+COPY configs/certs/${APACHE_SERVER_NAME}.key /etc/ssl/private/
 
 # Copy ohms
 ADD configs/ohms/html /var/www/html/ohms
