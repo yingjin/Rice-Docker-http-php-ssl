@@ -51,11 +51,11 @@ ENV API_BASE_PATH /secure/api
 ENV API_BACKEND_BASE_URL http://127.0.0.1:8000${API_BASE_PATH}
 
 # Install services, packages and do cleanup
-RUN apt update \
-    && apt install -y apache2 \
-    && apt install -y php7.3 libapache2-mod-php7.3 php7.3-xml  \
-    && apt install -y curl \
-    && apt install -y git \
+RUN apt-get update \
+    && apt-get install -y apache2 \
+    && apt-get install -y php7.3 libapache2-mod-php7.3 php7.3-xml  \
+    && apt-get install -y curl \
+    && apt-get install -y git \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy Apache configuration file
