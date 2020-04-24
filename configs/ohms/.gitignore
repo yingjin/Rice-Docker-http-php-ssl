@@ -1,0 +1,12 @@
+config/config.ini
+viewerfiles
+cachefiles
+viewerfiles/*
+cachefiles/*
+.htaccess
+.idea/
+.DS_store
+*/.DS_store
+.DS_Store
+nbproject
+imgs/avpreserve.png
