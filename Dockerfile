@@ -27,8 +27,8 @@ ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
 ENV APACHE_SERVER_NAME localhost
 ENV APACHE_SERVER_ADMIN yj4@rice.edu
-#ENV APACHE_SSL_CERTS localhost.crt
-#ENV APACHE_SSL_PRIVATE localhost.key
+ENV APACHE_SSL_CERTS ${APACHE_SERVER_NAME}.crt
+ENV APACHE_SSL_PRIVATE ${APACHE_SERVER_NAME}.key
 ENV APACHE_SSL_PORT 10443
 ENV APACHE_LOG_LEVEL info
 ENV APACHE_SSL_LOG_LEVEL info
@@ -68,8 +68,8 @@ COPY configs/httpd/dir.conf /etc/apache2/mods-enabled/
 COPY configs/httpd/ports.conf /etc/apache2/
 
 # Copy Server (pub and key)
-COPY configs/certs/${APACHE_SERVER_NAME}.crt /etc/ssl/certs/
-COPY configs/certs/${APACHE_SERVER_NAME}.key /etc/ssl/private/
+COPY configs/certs/${APACHE_SSL_CERTS} /etc/ssl/certs/
+COPY configs/certs/${APACHE_SSL_PRIVATE}.key /etc/ssl/private/
 
 # Copy ohms
 ADD configs/ohms/html /var/www/html/ohms
