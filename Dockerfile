@@ -70,7 +70,7 @@ COPY configs/httpd/ports.conf /etc/apache2/
 
 # Copy Server (pub and key)
 COPY configs/certs/${APACHE_SSL_CERTS} /etc/ssl/certs/
-COPY configs/certs/${APACHE_SSL_PRIVATE}.key /etc/ssl/private/
+COPY configs/certs/${APACHE_SSL_PRIVATE} /etc/ssl/private/
 
 # Copy ohms
 ADD configs/ohms/html /var/www/html/ohms
