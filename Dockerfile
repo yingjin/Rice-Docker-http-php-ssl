@@ -39,6 +39,8 @@ ENV APACHE_SSL_PROXY_CHECK_PEER_NAME On
 ENV APACHE_SERVER_SIGNATURE Off
 ENV APACHE_SERVER_TOKENS Prod
 
+# Application specific ENV setup
+ENV TOMCAT_INST riceDspace
 ENV APP_BASE_PATH /dspace
 
 # For more info See https://httpd.apache.org/docs/2.4/mod/mod_http2.html
