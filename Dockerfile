@@ -78,7 +78,7 @@ COPY configs/certs/${APACHE_SSL_PRIVATE} /etc/ssl/private/
 # Copy ohms, help and thumbnails
 ADD configs/ohms/html /var/www/html/ohms
 ADD configs/help /var/www/html/help
-ADD config/thumbnails /var/www/html/thumbnails
+ADD config/thumbnail /var/www/html/thumbnail
 
 COPY images/favicon.ico /var/www/html/favicon.ico
 
