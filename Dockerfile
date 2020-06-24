@@ -38,6 +38,7 @@ ENV APACHE_SSL_SSL_PROXY_ENGINE Off
 ENV APACHE_SSL_PROXY_CHECK_PEER_NAME On
 ENV APACHE_SERVER_SIGNATURE Off
 ENV APACHE_SERVER_TOKENS Prod
+ENV APACHE_DOCUMENT_ROOT /var/www/html
 
 # Application specific ENV setup
 ENV TOMCAT_INST riceDspace
@@ -74,8 +75,11 @@ COPY configs/httpd/ports.conf /etc/apache2/
 COPY configs/certs/${APACHE_SSL_CERTS} /etc/ssl/certs/
 COPY configs/certs/${APACHE_SSL_PRIVATE} /etc/ssl/private/
 
-# Copy ohms
+# Copy ohms, help and thumbnails
 ADD configs/ohms/html /var/www/html/ohms
+ADD configs/help /var/www/html/help
+ADD config/thumbnails /var/www/html/thumbnails
+
 COPY images/favicon.ico /var/www/html/favicon.ico
 
 # Copy scripts and entrypoint
