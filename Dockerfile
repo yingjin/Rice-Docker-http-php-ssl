@@ -62,7 +62,10 @@ RUN apt-get update \
     && apt-get install -y php7.3 libapache2-mod-php7.3 php7.3-xml  \
     && apt-get install -y curl \
     && apt-get install -y git \
+    && apt-get install -y wget \
+    && apt-get install -y jq \
     && rm -rf /var/lib/apt/lists/*
+
 
 # Copy Apache configuration file
 COPY configs/httpd/000-default.conf /etc/apache2/sites-available/
@@ -74,6 +77,14 @@ COPY configs/httpd/ports.conf /etc/apache2/
 # Copy Server (pub and key)
 COPY configs/certs/${APACHE_SSL_CERTS} /etc/ssl/certs/
 COPY configs/certs/${APACHE_SSL_PRIVATE} /etc/ssl/private/
+
+# for uv
+RUN wget $(curl -s https://api.github.com/repos/UniversalViewer/universalviewer/releases/latest | jq '.tarball_url' | sed 's/"//g') -O uv.tar.gz
+RUN tar -xvf uv.tar.gz
+
+RUN mv $(tar -tf uv.tar.gz | grep dist | head -2 | tail -1) /var/www/html/uv/universalViewer
+
+COPY configs/uv/index.html /var/www/html/uv/index.html
 
 # Copy ohms, help and thumbnails
 ADD configs/ohms/html /var/www/html/ohms

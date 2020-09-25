@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Universal Viewer</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+    function getDataURI()
+    {
+        // set the base uri for manifest generator run on port 5000
+        var uri_base = "http://localhost:5000/";
+        var url = window.location.search.substring(1);
+        window.alert("URL - " + url);
+        var data_uri = "";
+        var params = url.split('&');
+        window.alert("params - " + params);
+        for (var i = 0; i < params.length; i++)
+        {
+            var pName = params[i].split('=');
+            if (pName[0] == "handle")
+            {
+                data_uri = uri_base + "handle/" + pName[1];
+            }
+            else if (pName[0] == "ID") {
+                data_uri = uri_base + "ID/" + pName[1];
+            }
+        }
+        window.alert(data_uri);
+        return data_uri;
+      }
+    </script>
+</head>
+<body>
+
+        <!-- This universalViewer run on localhost 8888; should be called by given
+          localhost:8888?handle=<> or localhost:8888?ID=<> -->
+        <div id="universalViewerDiv" class="uv" data-locale="en-GB:English (GB)" data-config=""
+             data-uri="javascript:getDataURI();" data-collectionindex="0"
+             data-manifestindex="0" data-sequenceindex="0" data-canvasindex="0"
+             data-zoom="0" data-rotation="0"
+             style="width:1100px; height:700px; background-color: #000"></div>
+        <!--div id="universalViewerDiv" class="uv" data-locale="en-GB:English (GB)" data-config=""
+             data-uri="http://iiif.onb.ac.at/presentation/ABO/+Z196807705/manifest/" data-collectionindex="0"
+             data-manifestindex="0" data-sequenceindex="0" data-canvasindex="0"
+             data-zoom="0" data-rotation="0"
+             style="width:1100px; height:700px; background-color: #000"></div-->
+        <script type="text/javascript" id="embedUV"
+                src="/lib/embed.js"></script>
+        <script type="text/javascript">/* wordpress fix */</script>
+
+    </div>
+
+
+</body>
+</html>
