@@ -82,11 +82,14 @@ COPY configs/certs/${APACHE_SSL_PRIVATE} /etc/ssl/private/
 RUN wget $(curl -s https://api.github.com/repos/UniversalViewer/universalviewer/releases/latest | jq '.tarball_url' | sed 's/"//g') -O uv.tar.gz
 RUN tar -xvf uv.tar.gz
 
-RUN mv $(tar -tf uv.tar.gz | grep dist | head -2 | tail -1) /var/www/html/uv/universalViewer
+#RUN mv $(tar -tf uv.tar.gz | grep dist | head -2 | tail -1) /universalViewer
+RUN mkdir -p /var/www/html/uv/; mv $(tar -tf uv.tar.gz | grep dist | head -2 | tail -1) /var/www/html/uv/universalViewer
+#/var/www/html/uv/universalViewer
 
-COPY configs/uv/index.html /var/www/html/uv/index.html
+#COPY configs/uv/index.html /var/www/html/uv/index.html
 
 # Copy ohms, help and thumbnails
+ADD configs/uv/examples /var/www/html/uv
 ADD configs/ohms/html /var/www/html/ohms
 ADD configs/help /var/www/html/help
 ADD configs/thumbnail /var/www/html/thumbnail
