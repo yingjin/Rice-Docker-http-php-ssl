@@ -1,4 +1,4 @@
-FROM ubuntu:19.10
+FROM ubuntu:20.04
 # Metadata params
 ARG BUILD_DATE
 ARG VCS_REF
@@ -59,7 +59,7 @@ ENV API_BACKEND_BASE_URL http://127.0.0.1:8000${API_BASE_PATH}
 # Install services, packages and do cleanup
 RUN apt-get update \
     && apt-get install -y apache2 \
-    && apt-get install -y php7.3 libapache2-mod-php7.3 php7.3-xml  \
+    && apt-get install -y php7.4 libapache2-mod-php7.4 php7.4-xml  \
     && apt-get install -y curl \
     && apt-get install -y git \
     && apt-get install -y wget \
@@ -114,7 +114,7 @@ RUN a2enmod ssl \
     && a2enmod proxy \
     && a2enmod proxy_ajp \
     && a2enmod remoteip \
-    && a2enmod php7.3 \
+    && a2enmod php7.4 \
     && a2ensite default-ssl \
     && a2enconf ssl-params \
     && c_rehash /etc/ssl/certs/
